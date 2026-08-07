@@ -1,16 +1,42 @@
-# React + Vite
+# AstroLive Reimagined
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Built for **AstroHack 2026** (Astrolive x Unstop).
 
-Currently, two official plugins are available:
+A prototype that reimagines AstroLive around one idea: the platform actually
+serves two different users — the **Seeker**, who wants reassurance now, and
+the **Learner**, who wants to study astrology as a subject — and today they
+get the same generic browse-and-call experience. This prototype forks them
+into two deliberately different products from a single shared entry point.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## The fork
 
-## React Compiler
+- **Talk to someone now** (Consult) — a stark, monochrome, Co-Star-inspired
+  flow: intent capture → a jaali-lattice matching animation that visibly
+  demonstrates the specialist-filtering logic → a match (or an honest
+  fallback) → session → a timing follow-up capture for re-engagement.
+- **Learn to read a chart** (Learn) — a calm, credibility-forward,
+  Unacademy-adjacent flow: browse courses taught by working astrologers,
+  course detail, and a learning dashboard.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Picking Learn triggers the one deliberate visual transition in the app, from
+the stark Consult language into Learn's rounded ed-tech language. Picking
+Consult changes nothing, because nothing needs to change.
 
-## Expanding the Oxlint configuration
+## Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+React + React Router + Tailwind CSS, built with Vite. No backend — state and
+data are mocked in [`src/state`](src/state) and [`src/data`](src/data); this
+is a UX/product prototype, not a production system.
+
+## Running locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```

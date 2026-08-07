@@ -1,5 +1,6 @@
 {
   "name": "astrolive",
+  "description": "AstroLive Reimagined — a two-path astrology platform prototype built for AstroHack 2026 (Astrolive x Unstop).",
   "private": true,
   "version": "0.0.0",
   "type": "module",
