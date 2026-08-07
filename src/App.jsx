@@ -7,6 +7,7 @@ import MatchResult from './pages/consult/MatchResult'
 import Fallback from './pages/consult/Fallback'
 import Session from './pages/consult/Session'
 import PostSession from './pages/consult/PostSession'
+import CompatShare from './pages/consult/CompatShare'
 import Browse from './pages/learn/Browse'
 import CourseDetail from './pages/learn/CourseDetail'
 import Dashboard from './pages/learn/Dashboard'
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/consult/fallback" element={<Fallback />} />
           <Route path="/consult/session" element={<Session />} />
           <Route path="/consult/post-session" element={<PostSession />} />
+          <Route path="/compat/:token" element={<CompatShare />} />
 
           <Route path="/learn" element={<Browse />} />
           <Route path="/learn/course/:id" element={<CourseDetail />} />

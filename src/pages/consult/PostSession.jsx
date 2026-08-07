@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppState } from '../../state/AppState'
 import { Logo } from '../../components/Logo'
 import { RangeCalendar } from '../../components/RangeCalendar'
+import { SIGNS, encodeCompatToken } from '../../data/compat'
 
 const DAY_FMT = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' })
 const DAY_YEAR_FMT = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -20,6 +21,11 @@ export default function PostSession() {
   const [confirmed, setConfirmed] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [range, setRange] = useState({ start: null, end: null })
+  const [showCompat, setShowCompat] = useState(false)
+  const [yourName, setYourName] = useState('You')
+  const [yourSign, setYourSign] = useState('')
+  const [friendName, setFriendName] = useState('')
+  const [friendSign, setFriendSign] = useState('')
 
   function confirmSuggested() {
     setTimingFollowUp({ label: 'Mid October 2026', source: 'mentioned in session' })
@@ -34,6 +40,17 @@ export default function PostSession() {
 
   function skip() {
     navigate('/')
+  }
+
+  function generateCompat() {
+    if (!yourSign || !friendName.trim()) return
+    const token = encodeCompatToken({
+      n: yourName.trim() || 'You',
+      s: yourSign,
+      fn: friendName.trim(),
+      fs: friendSign || null,
+    })
+    navigate(`/compat/${token}`)
   }
 
   return (
@@ -96,6 +113,76 @@ export default function PostSession() {
             </button>
           </>
         )}
+
+        <div className="mt-10 border-t border-consult-ink/15 pt-6">
+          {!showCompat ? (
+            <button
+              onClick={() => setShowCompat(true)}
+              className="font-grotesque w-full border border-consult-ink/25 py-2.5 text-sm font-semibold text-consult-ink/70 hover:border-consult-ink hover:text-consult-ink"
+            >
+              See your compatibility with someone
+            </button>
+          ) : (
+            <div className="border border-consult-ink/15 p-4">
+              <div className="grid grid-cols-2 gap-3">
+                <label className="font-grotesque text-xs text-consult-ink/50">
+                  Your name
+                  <input
+                    value={yourName}
+                    onChange={(e) => setYourName(e.target.value)}
+                    className="font-grotesque mt-1 w-full border border-consult-ink/25 px-3 py-2 text-sm text-consult-ink outline-none focus:border-consult-ink"
+                  />
+                </label>
+                <label className="font-grotesque text-xs text-consult-ink/50">
+                  Your sign
+                  <select
+                    value={yourSign}
+                    onChange={(e) => setYourSign(e.target.value)}
+                    className="font-grotesque mt-1 w-full border border-consult-ink/25 bg-consult-paper px-3 py-2 text-sm text-consult-ink outline-none focus:border-consult-ink"
+                  >
+                    <option value="">Pick one</option>
+                    {SIGNS.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="font-grotesque text-xs text-consult-ink/50">
+                  Their name
+                  <input
+                    value={friendName}
+                    onChange={(e) => setFriendName(e.target.value)}
+                    placeholder="e.g. Aryan"
+                    className="font-grotesque mt-1 w-full border border-consult-ink/25 px-3 py-2 text-sm text-consult-ink outline-none focus:border-consult-ink"
+                  />
+                </label>
+                <label className="font-grotesque text-xs text-consult-ink/50">
+                  Their sign, if you know it
+                  <select
+                    value={friendSign}
+                    onChange={(e) => setFriendSign(e.target.value)}
+                    className="font-grotesque mt-1 w-full border border-consult-ink/25 bg-consult-paper px-3 py-2 text-sm text-consult-ink outline-none focus:border-consult-ink"
+                  >
+                    <option value="">Not sure</option>
+                    {SIGNS.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <button
+                onClick={generateCompat}
+                disabled={!yourSign || !friendName.trim()}
+                className="font-grotesque mt-4 w-full bg-consult-ink py-3 text-sm font-semibold text-consult-paper disabled:opacity-30"
+              >
+                See the match
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
