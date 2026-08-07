@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Fork + Consult — stark, monochrome, Co-Star-inspired editorial */
+  --color-consult-paper: #EDE7DA;
+  --color-consult-ink: #111110;
+  /* Rare exception only — at most one word, once, in the whole Consult flow. Never a recurring UI color. */
+  --color-consult-rare-accent: #B3281C;
+
+  /* Learn path — ed-tech */
+  --color-learn-base: #FAFAF9;
+  --color-learn-ink: #14181B;
+  --color-learn-blue: #1D4ED8;
+  --color-learn-teal: #0F766E;
+  --color-learn-line: #E4E4E1;
+
+  --font-display: 'Anton', sans-serif;
+  --font-grotesque: 'Archivo', sans-serif;
+  --font-humanist: 'Inter', sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100svh;
+}
